@@ -1,0 +1,2 @@
+# StreamHub-OpenAPI
+API Specification
