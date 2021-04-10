@@ -15,17 +15,8 @@ servers:
   - url: 'http://localhost:8080'
     description: api
 paths:
-  '/video/{videoHash}':
-    parameters:
-      - schema:
-          type: string
-          pattern: '^[A-Za-z0-9]+$'
-          minLength: 8
-          maxLength: 16
-        name: videoHash
-        in: path
-        required: true
-        description: Video Hash
+  /video:
+    parameters: []
     get:
       summary: Your GET endpoint
       responses:
@@ -38,17 +29,33 @@ paths:
                 properties:
                   video:
                     $ref: '#/components/schemas/Video'
-                  uploader:
+                  user:
                     $ref: '#/components/schemas/User'
                 required:
                   - video
-                  - uploader
+                  - user
                 readOnly: true
       operationId: getVideoById
       description: get a video by it's id
       parameters: []
       tags:
         - video
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              format: int32
+              properties:
+                hash:
+                  type: string
+                  pattern: '^[A-Za-z0-9]+$'
+                  minLength: 8
+                  maxLength: 16
+              required:
+                - hash
+            examples: {}
+        description: ''
 components:
   schemas:
     Video:
