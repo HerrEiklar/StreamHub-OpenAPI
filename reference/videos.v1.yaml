@@ -2,7 +2,7 @@ openapi: 3.0.0
 info:
   title: videos
   version: 1.0.0
-  description: StreamHub Video API - still local
+  description: StreamHub Video API - EARLY DEV
   contact:
     name: Elias Huber
     url: 'http://www.huber.host'
@@ -12,8 +12,8 @@ info:
     name: Apache 2.0
     url: 'https://www.apache.org/licenses/LICENSE-2.0'
 servers:
-  - url: 'http://localhost:8080'
-    description: api
+  - url: 'http://videos-v1-api-edev-streamhub.0.0.0.0.xip.io'
+    description: videos-v1-edev
 paths:
   '/video/{videoHash}':
     parameters:
@@ -26,7 +26,7 @@ paths:
         in: path
         required: true
     get:
-      summary: Your GET endpoint
+      summary: Video GET endpoint
       tags:
         - video
       responses:
@@ -52,7 +52,7 @@ paths:
         in: path
         required: true
     get:
-      summary: Your GET endpoint
+      summary: location GET endpoint
       responses:
         '200':
           description: OK
@@ -201,4 +201,5 @@ components:
   parameters: {}
   examples: {}
 tags:
+  - name: location
   - name: video
