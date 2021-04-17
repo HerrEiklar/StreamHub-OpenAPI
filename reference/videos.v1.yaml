@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
   title: videos
-  version: 1.1.0
+  version: 1.2.0
   description: StreamHub Video API - EARLY DEV
   contact:
     name: Elias Huber
@@ -29,11 +29,15 @@ paths:
             application/json:
               schema:
                 type: object
+                additionalProperties: false
                 properties:
                   video:
                     $ref: '#/components/schemas/Video'
                   location:
                     $ref: '#/components/schemas/Location'
+                required:
+                  - video
+                  - location
                 readOnly: true
               examples: {}
       operationId: getVideoByHash
@@ -50,13 +54,16 @@ paths:
             application/json:
               schema:
                 type: object
+                additionalProperties: false
                 properties:
                   location:
                     $ref: '#/components/schemas/Location'
+                required:
+                  - location
                 readOnly: true
               examples: {}
-      operationId: getVideoLocationByHash
-      description: Get location of a video by hash
+      operationId: getLocationByHash
+      description: Get a location by hash
       tags:
         - location
 components:
@@ -138,8 +145,10 @@ components:
       minLength: 8
       maxLength: 16
       pattern: '^[A-Za-z0-9]+$'
-      description: Simply a hash
+      description: A 8 to 16 characters long hash
       example: Ej487FoEqy
+      x-tags:
+        - types
   securitySchemes: {}
   responses: {}
   parameters:
@@ -152,7 +161,7 @@ components:
         pattern: '^[A-Za-z0-9]+$'
         minLength: 8
         maxLength: 16
-      description: Simply a hash
+      description: A 8 to 16 characters long hash
   examples: {}
 tags:
   - name: location
