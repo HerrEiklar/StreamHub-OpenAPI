@@ -15,9 +15,17 @@ servers:
   - url: 'http://videos-v1-api-edev-streamhub.0.0.0.0.xip.io:8084'
     description: videos-v1-edev
 paths:
-  '/video/{hash}':
+  '/videos/{hash}':
     parameters:
-      - $ref: '#/components/parameters/Hash'
+      - name: hash
+        in: path
+        required: true
+        schema:
+          type: string
+          pattern: '^[A-Za-z0-9]+$'
+          minLength: 8
+          maxLength: 16
+        description: A 8 to 16 characters long hash
     get:
       summary: Video GET endpoint
       tags:
@@ -42,11 +50,19 @@ paths:
               examples: {}
       operationId: getVideoByHash
       description: Get a video by hash
-  '/location/{hash}':
+  '/locations/{hash}':
     parameters:
-      - $ref: '#/components/parameters/Hash'
+      - name: hash
+        in: path
+        required: true
+        schema:
+          type: string
+          pattern: '^[A-Za-z0-9]+$'
+          minLength: 8
+          maxLength: 16
+        description: A 8 to 16 characters long hash
     get:
-      summary: location GET endpoint
+      summary: locations GET endpoint
       responses:
         '200':
           description: OK
@@ -89,10 +105,6 @@ components:
           type: string
           format: date-time
           readOnly: true
-        locations:
-          type: array
-          items:
-            $ref: '#/components/schemas/Hash'
         type:
           type: array
           items:
@@ -105,7 +117,6 @@ components:
         - description
         - uploadDate
         - type
-        - locations
     Location:
       type: object
       title: Location
