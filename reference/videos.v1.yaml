@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
   title: videos
-  version: 1.2.0
+  version: 1.0.0
   description: StreamHub Video API - EARLY DEV
   contact:
     name: Elias Huber
@@ -15,7 +15,7 @@ servers:
   - url: 'http://videos-v1-api-edev-streamhub.0.0.0.0.xip.io:8084'
     description: videos-v1-edev
 paths:
-  '/videos/{hash}':
+  '/video/{hash}':
     parameters:
       - name: hash
         in: path
@@ -45,12 +45,11 @@ paths:
                     $ref: '#/components/schemas/Location'
                 required:
                   - video
-                  - location
                 readOnly: true
               examples: {}
       operationId: getVideoByHash
       description: Get a video by hash
-  '/locations/{hash}':
+  '/location/{hash}':
     parameters:
       - name: hash
         in: path
