@@ -1,8 +1,8 @@
 openapi: 3.0.0
 info:
-  title: videos
+  title: mediaDetails
   version: 1.0.0
-  description: StreamHub Video API - EARLY DEV
+  description: StreamHub media details API - EARLY DEV
   contact:
     name: Elias Huber
     url: 'http://www.huber.host'
@@ -13,7 +13,7 @@ info:
     url: 'https://www.apache.org/licenses/LICENSE-2.0'
 servers:
   - url: 'http://videos-v1-api-edev-streamhub.0.0.0.0.xip.io:8084'
-    description: videos-v1-edev
+    description: mediaDetails
 paths:
   '/video/{hash}':
     parameters:
@@ -160,6 +160,68 @@ components:
       example: Ej487FoEqy
       x-tags:
         - types
+    NewLocation:
+      title: NewLocation
+      type: object
+      properties:
+        hash:
+          $ref: '#/components/schemas/Hash'
+        type:
+          type: string
+          enum:
+            - s3
+            - web
+        s3:
+          type: object
+          additionalProperties: false
+          properties:
+            secure:
+              type: boolean
+            bucketName:
+              type: string
+              maxLength: 40
+            dirName:
+              type: string
+              maxLength: 300
+            region:
+              type: string
+              maxLength: 20
+            s3Url:
+              type: string
+              maxLength: 100
+          required:
+            - bucketName
+            - dirName
+            - s3Url
+        web:
+          type: object
+          additionalProperties: false
+          properties:
+            protocol:
+              type: string
+              enum:
+                - http
+                - https
+                - ftp
+                - sftp
+              pattern: '^[A-Za-z0-9]+$'
+              maxLength: 8
+            host:
+              type: string
+              maxLength: 100
+            port:
+              type: integer
+              format: int32
+            path:
+              type: string
+              maxLength: 300
+          required:
+            - protocol
+            - host
+            - port
+            - path
+      required:
+        - type
   securitySchemes: {}
   responses: {}
   parameters:

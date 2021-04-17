@@ -1,0 +1,59 @@
+openapi: 3.0.0
+info:
+  title: mediaStream
+  version: 1.0.0
+  description: StreamHub mediaStream Server - EARLY DEV
+  contact:
+    name: Elias Huber
+    url: 'http://www.huber.host'
+    email: elias@huber.host
+  termsOfService: 'http://streamhub.huber.host/tos'
+  license:
+    name: Apache 2.0
+    url: 'https://www.apache.org/licenses/LICENSE-2.0'
+servers:
+  - url: 'http://mediaStream-v1-edev-streamhub.0.0.0.0.xip.io:8084'
+    description: mediaDetails
+paths:
+  '/{file}':
+    parameters:
+      - in: path
+        name: file
+        required: true
+        schema:
+          type: string
+          maxLength: 60
+    get:
+      summary: Your GET endpoint
+      tags:
+        - stream
+      responses:
+        '200':
+          description: OK
+          content:
+            application/octet-stream:
+              schema: {}
+              examples: {}
+          headers: {}
+      operationId: getStream
+      description: Get the requested media
+      parameters:
+        - schema:
+            type: integer
+            format: int32
+            maximum: 20
+          in: header
+          name: Video_Identifier
+          description: ID of a video - development
+        - schema:
+            type: string
+            pattern: '^[A-Za-z0-9]+$'
+            minLength: 8
+            maxLength: 16
+          in: header
+          name: Video_Hash
+          description: Hash of a video
+components:
+  schemas: {}
+tags:
+  - name: stream
