@@ -41,8 +41,6 @@ paths:
                 properties:
                   video:
                     $ref: '#/components/schemas/Video'
-                  location:
-                    $ref: '#/components/schemas/Location'
                 required:
                   - video
                 readOnly: true
@@ -104,6 +102,8 @@ components:
           type: string
           format: date-time
           readOnly: true
+        location:
+          $ref: '#/components/schemas/Hash'
         type:
           type: array
           items:
@@ -116,6 +116,7 @@ components:
         - description
         - uploadDate
         - type
+        - location
     Location:
       type: object
       title: Location
