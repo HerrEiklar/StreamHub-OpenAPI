@@ -44,7 +44,7 @@ paths:
             format: int32
             maximum: 20
           in: header
-          name: Video_Identifier
+          name: Video-Identifier
           description: ID of a video - development
         - schema:
             type: string
@@ -52,7 +52,7 @@ paths:
             minLength: 8
             maxLength: 16
           in: header
-          name: Video_Hash
+          name: Video-Hash
           description: Hash of a video
           required: true
 components:
