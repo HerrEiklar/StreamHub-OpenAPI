@@ -23,6 +23,7 @@ paths:
         schema:
           type: string
           maxLength: 60
+        description: File name
     get:
       summary: Your GET endpoint
       tags:
@@ -53,6 +54,7 @@ paths:
           in: header
           name: Video_Hash
           description: Hash of a video
+          required: true
 components:
   schemas: {}
 tags:
