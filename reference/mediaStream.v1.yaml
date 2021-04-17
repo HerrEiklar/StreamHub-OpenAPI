@@ -41,8 +41,6 @@ paths:
       parameters:
         - schema:
             type: integer
-            format: int32
-            maximum: 20
           in: header
           name: VideoIdentifier
           description: ID of a video - development
