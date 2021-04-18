@@ -12,7 +12,7 @@ info:
     name: Apache 2.0
     url: 'https://www.apache.org/licenses/LICENSE-2.0'
 servers:
-  - url: 'http://information-v1-api-edev-streamhub.0.0.0.0.xip.io:8085'
+  - url: 'http://information-v1-api-edev-streamhub.0.0.0.0.xip.io:8084'
     description: mediaDetails
 paths:
   '/{file}':
@@ -32,7 +32,7 @@ paths:
         '200':
           description: OK
           content:
-            application/octet-stream:
+            multipart/form-data:
               schema: {}
               examples: {}
           headers: {}
