@@ -1,0 +1,114 @@
+openapi: 3.0.0
+info:
+  title: Information API
+  version: 1.0.0
+  description: 'StreamHub Information API - reads Video, User and other information'
+  contact:
+    name: Elias Huber
+    url: 'http://www.huber.host'
+    email: elias@huber.host
+  termsOfService: 'http://streamhub.huber.host/tos'
+  license:
+    name: Apache 2.0
+    url: 'https://www.apache.org/licenses/LICENSE-2.0'
+servers:
+  - url: 'http://information-v1-api-edev-streamhub.0.0.0.0.xip.io:8084'
+    description: mediaDetails
+paths:
+  '/video/{hash}':
+    parameters:
+      - name: hash
+        in: path
+        required: true
+        schema:
+          type: string
+          pattern: '^[A-Za-z0-9]+$'
+          minLength: 8
+          maxLength: 16
+        description: A 8 to 16 characters long hash
+    get:
+      summary: Video GET endpoint
+      tags:
+        - video
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: false
+                properties:
+                  video:
+                    $ref: '#/components/schemas/Video'
+                required:
+                  - video
+                readOnly: true
+              examples: {}
+      operationId: getVideoByHash
+      description: Get a video by hash
+components:
+  schemas:
+    Video:
+      type: object
+      title: Video
+      description: Video Model
+      x-examples: {}
+      additionalProperties: false
+      x-tags:
+        - video
+      properties:
+        hash:
+          $ref: '#/components/schemas/Hash'
+        title:
+          type: string
+          maxLength: 70
+        description:
+          type: string
+          maxLength: 5000
+        uploadDate:
+          type: string
+          format: date-time
+          readOnly: true
+        location:
+          $ref: '#/components/schemas/Hash'
+        type:
+          type: array
+          items:
+            enum:
+              - dash
+              - hls
+            type: string
+      required:
+        - title
+        - description
+        - uploadDate
+        - type
+        - location
+    Hash:
+      type: string
+      title: Hash
+      minLength: 8
+      maxLength: 16
+      pattern: '^[A-Za-z0-9]+$'
+      description: A 8 to 16 characters long hash
+      example: Ej487FoEqy
+      x-tags:
+        - types
+  securitySchemes: {}
+  responses: {}
+  parameters:
+    Hash:
+      name: hash
+      in: path
+      required: true
+      schema:
+        type: string
+        pattern: '^[A-Za-z0-9]+$'
+        minLength: 8
+        maxLength: 16
+      description: A 8 to 16 characters long hash
+  examples: {}
+tags:
+  - name: location
+  - name: video

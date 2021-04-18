@@ -1,8 +1,8 @@
 openapi: 3.0.0
 info:
-  title: mediaStream
+  title: Media Stream API
   version: 1.0.0
-  description: StreamHub mediaStream Server - EARLY DEV
+  description: StreamHub Media Stream API - returns a Media Stream by header information
   contact:
     name: Elias Huber
     url: 'http://www.huber.host'
@@ -12,7 +12,7 @@ info:
     name: Apache 2.0
     url: 'https://www.apache.org/licenses/LICENSE-2.0'
 servers:
-  - url: 'http://mediaStream-v1-edev-streamhub.0.0.0.0.xip.io:8084'
+  - url: 'http://information-v1-api-edev-streamhub.0.0.0.0.xip.io:8085'
     description: mediaDetails
 paths:
   '/{file}':
