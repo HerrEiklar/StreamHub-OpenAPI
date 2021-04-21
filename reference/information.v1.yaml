@@ -16,16 +16,6 @@ servers:
     description: mediaDetails
 paths:
   '/video/{hash}':
-    parameters:
-      - name: hash
-        in: path
-        required: true
-        schema:
-          type: string
-          pattern: '^[A-Za-z0-9]+$'
-          minLength: 8
-          maxLength: 16
-        description: A 8 to 16 characters long hash
     get:
       summary: Video GET endpoint
       tags:
@@ -47,6 +37,8 @@ paths:
               examples: {}
       operationId: getVideoByHash
       description: Get a video by hash
+    parameters:
+      - $ref: '#/components/parameters/Hash'
 components:
   schemas:
     Video:
@@ -59,7 +51,7 @@ components:
         - video
       properties:
         hash:
-          $ref: '#/components/schemas/Hash'
+          $ref: ./Hash.v1.yaml
         title:
           type: string
           maxLength: 70
@@ -71,43 +63,35 @@ components:
           format: date-time
           readOnly: true
         location:
-          $ref: '#/components/schemas/Hash'
+          $ref: ./Hash.v1.yaml
         type:
           type: array
+          uniqueItems: true
           items:
+            type: string
             enum:
               - dash
               - hls
-            type: string
+              - other
       required:
         - title
         - description
         - uploadDate
-        - type
         - location
-    Hash:
-      type: string
-      title: Hash
-      minLength: 8
-      maxLength: 16
-      pattern: '^[A-Za-z0-9]+$'
-      description: A 8 to 16 characters long hash
-      example: Ej487FoEqy
-      x-tags:
-        - types
+        - type
   securitySchemes: {}
   responses: {}
   parameters:
     Hash:
       name: hash
       in: path
-      required: true
       schema:
         type: string
         pattern: '^[A-Za-z0-9]+$'
         minLength: 8
         maxLength: 16
       description: A 8 to 16 characters long hash
+      required: true
   examples: {}
 tags:
   - name: location

@@ -1,0 +1,7 @@
+type: integer
+title: Identifier
+format: int64
+x-examples: {}
+example: 0
+minimum: 0
+maximum: 1000000000000000000

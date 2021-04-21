@@ -1,0 +1,280 @@
+openapi: 3.0.0
+info:
+  title: Information Database Driver
+  version: 1.0.0
+  description: |-
+    Driver to uniformly get data from the database.
+    Executes basic CRUD operations.
+    I don't want all of my apis and serivces to directly access my databases, thus this driver.
+    Luckly noone, except interns will ever see this xD
+
+    Yea as i said: INTERNAL ONLY
+  contact:
+    name: Elias Huber
+    url: 'http://www.huber.host'
+    email: elias@huber.host
+  termsOfService: 'http://streamhub.huber.host/tos'
+  license:
+    name: Apache 2.0
+    url: 'https://www.apache.org/licenses/LICENSE-2.0'
+servers:
+  - url: 'http://informationdbdriver-v1-api-edev-streamhub.0.0.0.0.xip.io:8085'
+    description: informationDbDriver
+paths:
+  /VideoInformation:
+    get:
+      summary: VideoInformation GET endpoint
+      tags:
+        - video
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: false
+                properties:
+                  data:
+                    $ref: '#/components/schemas/VideoInformation'
+                required:
+                  - data
+      operationId: getVideoInformation
+      description: get videoinformation
+      parameters:
+        - schema:
+            type: array
+          in: query
+          name: selector
+          required: true
+          description: Array of selectors
+    post:
+      summary: VideoInformation POST endpoint
+      operationId: createVideoInformation
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: false
+                properties:
+                  data:
+                    $ref: '#/components/schemas/VideoInformation'
+                required:
+                  - data
+      description: create videoinformation
+      tags:
+        - video
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VideoInformation'
+    patch:
+      summary: VideoInformation PATCH endpoint
+      operationId: updateVideoInformation
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: false
+                properties:
+                  data:
+                    $ref: '#/components/schemas/VideoInformation'
+                required:
+                  - data
+      description: update videoinformation
+      tags:
+        - video
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VideoInformation'
+    delete:
+      summary: VideoInformation DELETE endpoint
+      operationId: deleteVideoInformation
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: false
+                properties:
+                  status:
+                    type: integer
+                    format: int32
+                required:
+                  - status
+      description: delete videoinformation
+      tags:
+        - video
+    parameters: []
+  /VideoIdFromHash:
+    get:
+      summary: VideoIdFromHash GET endpoint
+      tags:
+        - video
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: false
+                properties:
+                  data:
+                    $ref: '#/components/schemas/VideoIdFromHash'
+                required:
+                  - data
+      operationId: getVideoIdFromHash
+      description: Get video id from hash
+      parameters:
+        - schema:
+            type: array
+          in: query
+          name: selector
+          description: Array of selectors
+          required: true
+    post:
+      summary: VideoIdFromHash POST endpoint
+      operationId: createVideoIdFromHash
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: false
+                properties:
+                  data:
+                    $ref: '#/components/schemas/VideoIdFromHash'
+                required:
+                  - data
+      description: Create video id from hash
+      tags:
+        - video
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VideoIdFromHash'
+    patch:
+      summary: VideoIdFromHash PATCH endpoint
+      operationId: updateVideoIdFromHash
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: false
+                properties:
+                  data:
+                    $ref: '#/components/schemas/VideoIdFromHash'
+                required:
+                  - data
+      description: Update video id from hash
+      tags:
+        - video
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VideoIdFromHash'
+    delete:
+      summary: VideoIdFromHash DELETE endpoint
+      operationId: deleteVideoIdFromHash
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: false
+                properties:
+                  status:
+                    type: integer
+                    format: int32
+                required:
+                  - status
+      description: Delete video id from hash
+      tags:
+        - video
+components:
+  schemas:
+    VideoIdFromHash:
+      type: object
+      title: VideoIdToHash
+      description: Identifier to Hash
+      x-tags:
+        - video
+      additionalProperties: false
+      properties:
+        hash:
+          $ref: ./Hash.v1.yaml
+        id:
+          $ref: ./Identifier.v1.yaml
+      required:
+        - hash
+        - id
+    VideoInformation:
+      type: object
+      title: Video
+      description: Video Model
+      x-examples: {}
+      additionalProperties: false
+      x-tags:
+        - video
+      properties:
+        hash:
+          $ref: ./Hash.v1.yaml
+        title:
+          type: string
+          maxLength: 70
+        description:
+          type: string
+          maxLength: 5000
+        uploadDate:
+          type: string
+          format: date-time
+          readOnly: true
+        type:
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+            enum:
+              - dash
+              - hls
+              - other
+      required:
+        - hash
+        - title
+        - description
+        - uploadDate
+        - type
+  parameters:
+    Hash:
+      name: hash
+      in: query
+      required: true
+      schema:
+        type: string
+        pattern: '^[A-Za-z0-9]+$'
+        minLength: 8
+        maxLength: 16
+      description: A 8 to 16 characters long hash
+tags:
+  - name: video
