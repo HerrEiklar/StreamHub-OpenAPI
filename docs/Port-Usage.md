@@ -19,6 +19,7 @@ i'll be using the 8090-8099 port range.
  8092 | S3 Instance
  8083 | Information V1 API
  8084 | mediaStream V1 API
+ 8085 | Information DB Driver V1 API
 
 ### About Service 8091
 
