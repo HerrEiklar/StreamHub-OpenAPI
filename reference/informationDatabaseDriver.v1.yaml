@@ -32,13 +32,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                additionalProperties: false
-                properties:
-                  data:
-                    $ref: '#/components/schemas/VideoInformation'
-                required:
-                  - data
+                $ref: '#/components/schemas/VideoInformation'
       operationId: getVideoInformation
       description: get videoinformation
       parameters:
@@ -57,13 +51,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                additionalProperties: false
-                properties:
-                  data:
-                    $ref: '#/components/schemas/VideoInformation'
-                required:
-                  - data
+                $ref: '#/components/schemas/VideoInformation'
       description: create videoinformation
       tags:
         - video
@@ -81,13 +69,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                additionalProperties: false
-                properties:
-                  data:
-                    $ref: '#/components/schemas/VideoInformation'
-                required:
-                  - data
+                $ref: '#/components/schemas/VideoInformation'
       description: update videoinformation
       tags:
         - video
@@ -105,14 +87,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                additionalProperties: false
-                properties:
-                  status:
-                    type: integer
-                    format: int32
-                required:
-                  - status
+                $ref: '#/components/schemas/VideoInformation'
       description: delete videoinformation
       tags:
         - video
@@ -128,13 +103,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                additionalProperties: false
-                properties:
-                  data:
-                    $ref: '#/components/schemas/VideoIdFromHash'
-                required:
-                  - data
+                $ref: '#/components/schemas/VideoIdFromHash'
       operationId: getVideoIdFromHash
       description: Get video id from hash
       parameters:
@@ -153,13 +122,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                additionalProperties: false
-                properties:
-                  data:
-                    $ref: '#/components/schemas/VideoIdFromHash'
-                required:
-                  - data
+                $ref: '#/components/schemas/VideoIdFromHash'
       description: Create video id from hash
       tags:
         - video
@@ -177,13 +140,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                additionalProperties: false
-                properties:
-                  data:
-                    $ref: '#/components/schemas/VideoIdFromHash'
-                required:
-                  - data
+                $ref: '#/components/schemas/VideoIdFromHash'
       description: Update video id from hash
       tags:
         - video
@@ -201,14 +158,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                additionalProperties: false
-                properties:
-                  status:
-                    type: integer
-                    format: int32
-                required:
-                  - status
+                $ref: '#/components/schemas/VideoIdFromHash'
       description: Delete video id from hash
       tags:
         - video
