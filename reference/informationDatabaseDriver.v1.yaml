@@ -223,9 +223,9 @@ components:
       additionalProperties: false
       properties:
         hash:
-          $ref: ./Hash.v1.yaml
+          $ref: '#/components/schemas/HashField'
         id:
-          $ref: ./Identifier.v1.yaml
+          $ref: '#/components/schemas/IdentifierField'
       required:
         - hash
         - id
@@ -239,7 +239,7 @@ components:
         - video
       properties:
         hash:
-          $ref: ./Hash.v1.yaml
+          $ref: '#/components/schemas/HashField'
         title:
           type: string
           maxLength: 70
@@ -265,17 +265,21 @@ components:
         - description
         - uploadDate
         - type
-  parameters:
-    Hash:
-      name: hash
-      in: query
-      required: true
-      schema:
-        type: string
-        pattern: '^[A-Za-z0-9]+$'
-        minLength: 8
-        maxLength: 16
-      description: A 8 to 16 characters long hash
+    IdentifierField:
+      type: integer
+      title: IdentifierField
+      maximum: 1000000000000000000
+      minimum: 0
+      format: int64
+      description: Identifier Field
+    HashField:
+      type: string
+      title: HashField
+      pattern: '^[A-Za-z0-9]+$'
+      minLength: 8
+      maxLength: 16
+      description: Hash Field
+  parameters: {}
   securitySchemes: {}
 tags:
   - name: video

@@ -15,15 +15,9 @@ servers:
   - url: 'http://information-api-v1-edev-streamhub.0.0.0.0.xip.io:8094'
     description: mediaStreamRelay
 paths:
-  '/{file}':
+  '/{HashField}':
     parameters:
-      - in: path
-        name: file
-        required: true
-        schema:
-          type: string
-          maxLength: 60
-        description: File name
+      - $ref: '#/components/parameters/HashField'
     get:
       summary: Your GET endpoint
       tags:
@@ -38,17 +32,17 @@ paths:
           headers: {}
       operationId: getStream
       description: Get the requested media
-      parameters:
-        - schema:
-            type: string
-            pattern: '^[A-Za-z0-9]+$'
-            minLength: 8
-            maxLength: 16
-          in: header
-          name: VideoHash
-          description: Hash of a video
-        - $ref: ./informationDatabaseDriver.v1.yaml#/components/parameters/Hash
 components:
   schemas: {}
+  parameters:
+    HashField:
+      name: HashField
+      in: path
+      required: true
+      schema:
+        type: string
+        pattern: '^[A-Za-z0-9]+$'
+        minLength: 8
+        maxLength: 16
 tags:
   - name: stream
