@@ -223,9 +223,15 @@ components:
       additionalProperties: false
       properties:
         hash:
-          $ref: '#/components/schemas/HashField'
+          type: string
+          pattern: '^[A-Za-z0-9]+$'
+          minLength: 8
+          maxLength: 16
         id:
-          $ref: '#/components/schemas/IdentifierField'
+          type: integer
+          format: int64
+          maximum: 1000000000000000000
+          minimum: 0
       required:
         - hash
         - id
@@ -239,7 +245,10 @@ components:
         - video
       properties:
         hash:
-          $ref: '#/components/schemas/HashField'
+          type: string
+          pattern: '^[A-Za-z0-9]+$'
+          minLength: 8
+          maxLength: 16
         title:
           type: string
           maxLength: 70
@@ -265,20 +274,6 @@ components:
         - description
         - uploadDate
         - type
-    IdentifierField:
-      type: integer
-      title: IdentifierField
-      maximum: 1000000000000000000
-      minimum: 0
-      format: int64
-      description: Identifier Field
-    HashField:
-      type: string
-      title: HashField
-      pattern: '^[A-Za-z0-9]+$'
-      minLength: 8
-      maxLength: 16
-      description: Hash Field
   parameters: {}
   securitySchemes: {}
 tags:
