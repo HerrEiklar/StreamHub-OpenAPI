@@ -18,8 +18,8 @@ info:
     name: Apache 2.0
     url: 'https://www.apache.org/licenses/LICENSE-2.0'
 servers:
-  - url: 'http://informationdbdriver-v1-api-edev-streamhub.0.0.0.0.xip.io:8085'
-    description: informationDbDriver
+  - url: 'http://informationDatabaseDriver-api-v1-edev-streamhub.0.0.0.0.xip.io:8095'
+    description: informationDatabaseDriver
 paths:
   /VideoInformation:
     get:
@@ -276,5 +276,6 @@ components:
         minLength: 8
         maxLength: 16
       description: A 8 to 16 characters long hash
+  securitySchemes: {}
 tags:
   - name: video
