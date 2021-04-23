@@ -1,0 +1,30 @@
+{
+  "name": "streamhub-openapi",
+  "version": "1.0.0",
+  "description": "API Specification",
+  "main": "serve.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "preserve": "git pull && npm install",
+    "serve": "http-server reference -p 8090 -d true -i true -c-1 --no-dotfiles"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HerrEiklar/StreamHub-OpenAPI.git"
+  },
+  "keywords": [
+    "OpenAPI",
+    "docs"
+  ],
+  "author": "Elias Huber",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/HerrEiklar/StreamHub-OpenAPI/issues"
+  },
+  "homepage": "https://github.com/HerrEiklar/StreamHub-OpenAPI#readme",
+  "devDependencies": {
+    "http-server": "^0.12.3"
+  }
+}
