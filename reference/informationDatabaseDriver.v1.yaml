@@ -24,7 +24,7 @@ paths:
   /VideoInformation:
     get:
       summary: Your GET endpoint
-      tags: []
+      tags: ["video"]
       responses:
         '200':
           description: OK
@@ -36,7 +36,7 @@ paths:
       description: get video information
       parameters:
         - schema:
-            type: array
+            type: string
           in: query
           name: selector
           description: selector for data
@@ -46,7 +46,7 @@ paths:
   /VideoIdFromHash:
     get:
       summary: Your GET endpoint
-      tags: []
+      tags: ["video"]
       responses:
         '200':
           description: OK
@@ -58,7 +58,7 @@ paths:
       description: get video id from hash
       parameters:
         - schema:
-            type: array
+            type: string
           in: query
           name: selector
           description: selector for data
@@ -74,9 +74,9 @@ components:
       additionalProperties: false
       properties:
         hash:
-          $ref: ./Hash.v1.yaml
+          $ref: '#/components/schemas/HashField'
         id:
-          $ref: ./Identifier.v1.yaml
+          $ref: '#/components/schemas/IdentifierField'
       required:
         - hash
         - id
@@ -87,7 +87,7 @@ components:
       additionalProperties: false
       properties:
         hash:
-          $ref: ./Hash.v1.yaml
+          $ref: '#/components/schemas/HashField'
         title:
           type: string
           maxLength: 70
@@ -104,17 +104,18 @@ components:
         - description
         - uploadDate
         - type
-  parameters:
-    Hash:
-      name: hash
-      in: query
-      required: true
-      schema:
-        type: string
-        pattern: '^[A-Za-z0-9]+$'
-        minLength: 8
-        maxLength: 16
-      description: A 8 to 16 characters long hash
+    HashField:
+      type: string
+      title: HashField
+      pattern: '^[A-Za-z0-9]+$'
+      minLength: 8
+      maxLength: 16
+    IdentifierField:
+      type: integer
+      title: IdentifierField
+      format: int64
+      maximum: 1000000000000000000
+  parameters: {}
   securitySchemes: {}
 tags:
   - name: video

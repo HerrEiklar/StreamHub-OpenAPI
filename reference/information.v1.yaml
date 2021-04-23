@@ -59,7 +59,7 @@ components:
         - video
       properties:
         hash:
-          $ref: ./Hash.v1.yaml
+          $ref: '#/components/schemas/HashField'
         title:
           type: string
           maxLength: 70
@@ -71,7 +71,7 @@ components:
           format: date-time
           readOnly: true
         location:
-          $ref: ./Hash.v1.yaml
+          $ref: '#/components/schemas/HashField'
         type:
           type: array
           uniqueItems: true
@@ -88,6 +88,12 @@ components:
         - uploadDate
         - location
         - type
+    HashField:
+      type: string
+      title: HashField
+      pattern: '^[A-Za-z0-9]+$'
+      minLength: 8
+      maxLength: 16
   securitySchemes: {}
   responses: {}
   parameters: {}
