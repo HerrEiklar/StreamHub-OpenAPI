@@ -74,15 +74,9 @@ components:
       additionalProperties: false
       properties:
         hash:
-          type: string
-          pattern: '^[A-Za-z0-9]+$'
-          minLength: 8
-          maxLength: 16
+          $ref: ./Hash.v1.yaml
         id:
-          type: integer
-          format: int64
-          maximum: 1000000000000000000
-          minimum: 0
+          $ref: ./Identifier.v1.yaml
       required:
         - hash
         - id
@@ -93,10 +87,7 @@ components:
       additionalProperties: false
       properties:
         hash:
-          type: string
-          pattern: '^[A-Za-z0-9]+$'
-          minLength: 8
-          maxLength: 16
+          $ref: ./Hash.v1.yaml
         title:
           type: string
           maxLength: 70
@@ -112,5 +103,18 @@ components:
         - title
         - description
         - uploadDate
+        - type
+  parameters:
+    Hash:
+      name: hash
+      in: query
+      required: true
+      schema:
+        type: string
+        pattern: '^[A-Za-z0-9]+$'
+        minLength: 8
+        maxLength: 16
+      description: A 8 to 16 characters long hash
+  securitySchemes: {}
 tags:
   - name: video

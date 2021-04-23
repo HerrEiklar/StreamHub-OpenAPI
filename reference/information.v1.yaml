@@ -59,10 +59,7 @@ components:
         - video
       properties:
         hash:
-          type: string
-          pattern: '^[A-Za-z0-9]+$'
-          minLength: 8
-          maxLength: 16
+          $ref: ./Hash.v1.yaml
         title:
           type: string
           maxLength: 70
@@ -74,10 +71,7 @@ components:
           format: date-time
           readOnly: true
         location:
-          type: string
-          pattern: '^[A-Za-z0-9]+$'
-          minLength: 8
-          maxLength: 16
+          $ref: ./Hash.v1.yaml
         type:
           type: array
           uniqueItems: true
