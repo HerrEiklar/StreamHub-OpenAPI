@@ -107,20 +107,10 @@ components:
           type: string
           format: date-time
           readOnly: true
-        type:
-          type: array
-          uniqueItems: true
-          items:
-            type: string
-            enum:
-              - dash
-              - hls
-              - other
       required:
         - hash
         - title
         - description
         - uploadDate
-        - type
 tags:
   - name: video
