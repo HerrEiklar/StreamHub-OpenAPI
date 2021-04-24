@@ -211,30 +211,29 @@ components:
       maximum: 1000000000000000000
       x-tags:
         - Field
-    Response:
-      type: object
-      title: Response
-      additionalProperties: false
-      description: Generic response model
+    Success:
+      title: Success
+      description: Success response
       x-examples: {}
       x-tags:
         - Response
         - Model
+      oneOf:
+        - $ref: '#/components/schemas/VideoIdFromHash'
+        - $ref: '#/components/schemas/VideoInformation'
+    Error:
+      type: object
+      title: Error
+      additionalProperties: false
       properties:
         code:
           type: string
-          description: Response code
         message:
           type: string
-          description: Response message
-        data:
-          oneOf:
-            - $ref: '#/components/schemas/VideoIdFromHash'
-            - $ref: '#/components/schemas/VideoInformation'
-          description: Response data - given success
       required:
         - code
         - message
+      description: 'Error response '
   parameters: {}
   securitySchemes: {}
   responses:
@@ -243,14 +242,14 @@ components:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/Response'
+            $ref: '#/components/schemas/Success'
           examples: {}
     Error:
       description: Error response
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/Response'
+            $ref: '#/components/schemas/Error'
 tags:
   - name: delete
   - name: field
