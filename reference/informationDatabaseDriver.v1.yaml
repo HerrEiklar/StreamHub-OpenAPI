@@ -36,13 +36,13 @@ paths:
           $ref: '#/components/responses/Error'
       operationId: getVideoInformation
       description: get video information
-      parameters: []
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/VideoInformation'
-        description: Filter
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: selector
+          description: FIlter
+          required: true
     post:
       summary: VideoInformation POST endpoint
       operationId: createVideoInformation
@@ -50,12 +50,7 @@ paths:
         '200':
           $ref: '#/components/responses/Success'
       description: create video information
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/VideoInformation'
-        description: Data to be created
+      parameters: []
       tags:
         - video
         - post
@@ -66,12 +61,13 @@ paths:
         '200':
           $ref: '#/components/responses/Success'
       description: update video information
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/VideoInformation'
-        description: Data to be updated
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: selector
+          description: FIlter
+          required: true
       tags:
         - video
         - patch
@@ -82,15 +78,16 @@ paths:
         '200':
           $ref: '#/components/responses/Success'
       description: delete video information
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/VideoInformation'
-        description: Filter
       tags:
         - video
         - delete
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: selector
+          description: Filter
+          required: true
   /VideoIdFromHash:
     get:
       summary: VideoIdFromHash GET endpoint
@@ -102,13 +99,13 @@ paths:
           $ref: '#/components/responses/Success'
       operationId: getVideoIdFromHash
       description: get video id from hash
-      parameters: []
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/VideoIdFromHash'
-        description: Filter
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: selector
+          description: Filter
+          required: true
     post:
       summary: VideoIdFromHash POST endpoint
       operationId: createVideoIdFromHash
@@ -116,15 +113,10 @@ paths:
         '200':
           $ref: '#/components/responses/Success'
       description: create video id from hash
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/VideoIdFromHash'
-        description: Data to be created
       tags:
         - video
         - post
+      parameters: []
     patch:
       summary: VideoIdFromHash PATCH endpoint
       operationId: updateVideoIdFromHash
@@ -132,15 +124,16 @@ paths:
         '200':
           $ref: '#/components/responses/Success'
       description: update video id from hash
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/VideoIdFromHash'
-        description: Data to be updated
       tags:
         - video
         - patch
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: selector
+          description: Filter
+          required: true
     delete:
       summary: VideoIdFromHash DELETE endpoint
       operationId: deleteVideoIdFromHash
@@ -148,15 +141,16 @@ paths:
         '200':
           $ref: '#/components/responses/Success'
       description: delete video id from hash
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/VideoIdFromHash'
-        description: Filter
       tags:
         - video
         - delete
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: selector
+          description: Filter
+          required: true
 components:
   schemas:
     VideoIdFromHash:
