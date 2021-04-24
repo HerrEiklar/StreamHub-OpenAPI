@@ -23,48 +23,140 @@ servers:
 paths:
   /VideoInformation:
     get:
-      summary: Your GET endpoint
-      tags: ["video"]
+      summary: VideoInformation GET endpoint
+      tags:
+        - video
+        - get
       responses:
         '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/VideoInformation'
+          $ref: '#/components/responses/Success'
+        '400':
+          $ref: '#/components/responses/Error'
+        '404':
+          $ref: '#/components/responses/Error'
       operationId: getVideoInformation
       description: get video information
-      parameters:
-        - schema:
-            type: string
-          in: query
-          name: selector
-          description: selector for data
-          style: form
-          explode: true
-          required: true
-  /VideoIdFromHash:
-    get:
-      summary: Your GET endpoint
-      tags: ["video"]
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VideoInformation'
+        description: Filter
+    post:
+      summary: VideoInformation POST endpoint
+      operationId: createVideoInformation
       responses:
         '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/VideoIdFromHash'
+          $ref: '#/components/responses/Success'
+      description: create video information
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VideoInformation'
+        description: Data to be created
+      tags:
+        - video
+        - post
+    patch:
+      summary: VideoInformation PATCH endpoint
+      operationId: updateVideoInformation
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+      description: update video information
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VideoInformation'
+        description: Data to be updated
+      tags:
+        - video
+        - patch
+    delete:
+      summary: VideoInformation DELETE endpoint
+      operationId: deleteVideoInformation
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+      description: delete video information
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VideoInformation'
+        description: Filter
+      tags:
+        - video
+        - delete
+  /VideoIdFromHash:
+    get:
+      summary: VideoIdFromHash GET endpoint
+      tags:
+        - video
+        - get
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
       operationId: getVideoIdFromHash
       description: get video id from hash
-      parameters:
-        - schema:
-            type: string
-          in: query
-          name: selector
-          description: selector for data
-          required: true
-          style: form
-          explode: true
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VideoIdFromHash'
+        description: Filter
+    post:
+      summary: VideoIdFromHash POST endpoint
+      operationId: createVideoIdFromHash
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+      description: create video id from hash
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VideoIdFromHash'
+        description: Data to be created
+      tags:
+        - video
+        - post
+    patch:
+      summary: VideoIdFromHash PATCH endpoint
+      operationId: updateVideoIdFromHash
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+      description: update video id from hash
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VideoIdFromHash'
+        description: Data to be updated
+      tags:
+        - video
+        - patch
+    delete:
+      summary: VideoIdFromHash DELETE endpoint
+      operationId: deleteVideoIdFromHash
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+      description: delete video id from hash
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VideoIdFromHash'
+        description: Filter
+      tags:
+        - video
+        - delete
 components:
   schemas:
     VideoIdFromHash:
@@ -74,12 +166,15 @@ components:
       additionalProperties: false
       properties:
         hash:
-          $ref: '#/components/schemas/HashField'
+          $ref: '#/components/schemas/IdentifierField'
         id:
           $ref: '#/components/schemas/IdentifierField'
       required:
         - hash
         - id
+      x-tags:
+        - Model
+        - video
     VideoInformation:
       type: object
       title: Video
@@ -104,18 +199,69 @@ components:
         - description
         - uploadDate
         - type
+      x-tags:
+        - Model
+        - video
     HashField:
       type: string
       title: HashField
       pattern: '^[A-Za-z0-9]+$'
       minLength: 8
       maxLength: 16
+      x-tags:
+        - Field
     IdentifierField:
       type: integer
       title: IdentifierField
       format: int64
       maximum: 1000000000000000000
+      x-tags:
+        - Field
+    Response:
+      type: object
+      title: Response
+      additionalProperties: false
+      description: Generic response model
+      x-examples: {}
+      x-tags:
+        - Response
+        - Model
+      properties:
+        code:
+          type: string
+          description: Response code
+        message:
+          type: string
+          description: Response message
+        data:
+          oneOf:
+            - $ref: '#/components/schemas/VideoIdFromHash'
+            - $ref: '#/components/schemas/VideoInformation'
+          description: Response data - given success
+      required:
+        - code
+        - message
   parameters: {}
   securitySchemes: {}
+  responses:
+    Success:
+      description: Success response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Response'
+          examples: {}
+    Error:
+      description: Error response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Response'
 tags:
+  - name: delete
+  - name: field
+  - name: get
+  - name: patch
+  - name: post
+  - name: response
   - name: video
