@@ -158,17 +158,17 @@ components:
       title: VideoIdToHash
       description: Identifier to Hash
       additionalProperties: false
+      x-tags:
+        - Model
+        - video
       properties:
         hash:
-          $ref: '#/components/schemas/IdentifierField'
+          $ref: '#/components/schemas/HashField'
         id:
           $ref: '#/components/schemas/IdentifierField'
       required:
         - hash
         - id
-      x-tags:
-        - Model
-        - video
     VideoInformation:
       type: object
       title: Video
