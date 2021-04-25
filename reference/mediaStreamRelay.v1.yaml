@@ -32,23 +32,33 @@ paths:
         '200':
           description: OK
           content:
-            multipart/form-data:
+            application/vnd.apple.mpegurl:
               schema: {}
-              examples: {}
+            application/dash+xml:
+              schema: {}
+            video/mp4:
+              schema: {}
+            application/x-mpegURL:
+              schema: {}
+            video/MP2T:
+              schema: {}
           headers: {}
       operationId: getStream
       description: Get the requested media
       parameters:
-        - schema:
-            type: string
-            pattern: '^[A-Za-z0-9]+$'
-            minLength: 8
-            maxLength: 16
-          in: header
-          name: VideoHash
-          description: Hash of a video
-        - $ref: ./informationDatabaseDriver.v1.yaml#/components/parameters/Hash
+        - $ref: '#/components/parameters/Hash'
 components:
   schemas: {}
+  parameters:
+    Hash:
+      name: Hash
+      in: header
+      required: true
+      schema:
+        type: string
+        pattern: '^[A-Za-z0-9]+$'
+        minLength: 8
+        maxLength: 16
+      description: Generic hash
 tags:
   - name: stream
