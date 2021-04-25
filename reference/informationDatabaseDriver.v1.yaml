@@ -54,6 +54,12 @@ paths:
       tags:
         - video
         - post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VideoInformation'
+        description: Data to be inserted
     patch:
       summary: VideoInformation PATCH endpoint
       operationId: updateVideoInformation
@@ -71,6 +77,12 @@ paths:
       tags:
         - video
         - patch
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VideoInformation'
+        description: Data to be updated
     delete:
       summary: VideoInformation DELETE endpoint
       operationId: deleteVideoInformation
@@ -117,6 +129,12 @@ paths:
         - video
         - post
       parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VideoIdFromHash'
+        description: Data to be inserted
     patch:
       summary: VideoIdFromHash PATCH endpoint
       operationId: updateVideoIdFromHash
@@ -134,6 +152,12 @@ paths:
           name: selector
           description: Filter
           required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VideoIdFromHash'
+        description: Data to be updated
     delete:
       summary: VideoIdFromHash DELETE endpoint
       operationId: deleteVideoIdFromHash
