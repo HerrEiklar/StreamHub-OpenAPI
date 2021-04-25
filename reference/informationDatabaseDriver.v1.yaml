@@ -211,19 +211,22 @@ components:
       maximum: 1000000000000000000
       x-tags:
         - Field
-    Error:
+    ErrorModel:
       type: object
-      title: Error
+      title: ErrorModel
       additionalProperties: false
+      description: Error response
       properties:
         code:
           type: string
         message:
           type: string
+        statusCode:
+          type: integer
+          format: int32
       required:
-        - code
         - message
-      description: 'Error response '
+        - statusCode
   parameters: {}
   securitySchemes: {}
   responses:
@@ -232,7 +235,7 @@ components:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/Error'
+            $ref: '#/components/schemas/ErrorModel'
     VideoInformation:
       description: VideoInformation response
       content:
