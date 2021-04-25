@@ -217,14 +217,17 @@ components:
       additionalProperties: false
       description: Error response
       properties:
-        message:
-          type: string
         statusCode:
           type: integer
           format: int32
+        message:
+          type: string
+          format: int32
+        errorCode:
+          type: string
       required:
-        - message
         - statusCode
+        - message
   parameters: {}
   securitySchemes: {}
   responses:
