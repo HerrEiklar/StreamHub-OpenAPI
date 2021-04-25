@@ -217,8 +217,6 @@ components:
       additionalProperties: false
       description: Error response
       properties:
-        code:
-          type: string
         message:
           type: string
         statusCode:
